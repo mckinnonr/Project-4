@@ -1,0 +1,29 @@
+{
+  "name": "project-3",
+  "version": "1.0.0",
+  "description": "project-3",
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "browser-sync": "^2.9.10",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-sass": "^2.0.4"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mckinnonr/Project-3.git"
+  },
+  "author": "RM",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mckinnonr/Project-3/issues"
+  },
+  "homepage": "https://github.com/mckinnonr/Project-3#readme",
+  "keywords": [
+    "project-3"
+  ]
+}

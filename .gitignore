@@ -1,0 +1,25 @@
+# Git will ignore these files on commit #
+# =============== #
+# Ignore OS files #
+# =============== #
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+*[Tt]humbs.db
+*.Trashes# Ignore packages #
+# =============== #
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip# Ignore packages #
+# =============== #
+node_modules/
+# Any other files you want ignored #
+*.jpg
