@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myFormApp">
   <head>
     <meta charset="utf-8">
     <title>Welcome to Mars!</title>
@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="css/main.css">
   </head>
 
-  <body ng-app="myFormApp" class="page1">
-    <h1>Welcome to Mars!</h1>
-    <a href="page2.html"><div class="circle"></div></a>
-    <h2>Check in now</h2>
+  <body ui-view>
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <!-- Oct 22: Routing & Templates, Exercise 2: -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.15/angular-ui-router.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
+
   </body>
 </html>

@@ -1,25 +1,19 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Welcome to Mars!</title>
-    <meta name="description" content="">
-    <meta name="author" content="Ross McKinnon">
-    <link rel="stylesheet" href="css/main.css">
-  </head>
-
-  <body ng-app="myFormApp" ng-controller="RegisterFormCtrl" class="page3">
-    <div>
-      <h2>Recent Encounters</h2>
-      <h3>See an alien? Report it!</h3>
-
-      <form ng-submit="sendForm($event)" action="#" name="registerForm" novalidate >
-        <button ng-disabled="voterForm.$invalid">Report Encounter</button>
-      </form>
-    </div>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
-  </body>
-</html>
+<div class="page3">
+  <div class="header">
+    <h2>Recent Encounters</h2>
+    <h3>See an alien? Report it!</h3>
+  </div>
+  <!-- <form ng-submit="sendForm($event)" action="#" name="registerForm" novalidate > -->
+    <ul>
+      <li>Friday, Oct 23 - Lizard<p>Smoked it</p></li>
+      <li>Friday, Oct 23 - Lizard<p>Smoked it</p></li>
+      <li>Friday, Oct 23 - Lizard<p>Smoked it</p></li>
+      <li>Friday, Oct 23 - Lizard<p>Smoked it</p></li>
+      <li>Friday, Oct 23 - Lizard<p>Smoked it</p></li>
+      <li>Friday, Oct 23 - Lizard<p>Smoked it</p></li>
+    </ul>
+  <!-- </form> -->
+  <div>
+    <button ui-sref="report" ng-disabled="voterForm.$invalid">Report Encounter</button>
+  </div>
+</div>

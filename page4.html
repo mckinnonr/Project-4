@@ -1,18 +1,6 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Welcome to Mars!</title>
-    <meta name="description" content="">
-    <meta name="author" content="Ross McKinnon">
-    <link rel="stylesheet" href="css/main.css">
-  </head>
-
-  <body ng-app="myFormApp" ng-controller="ReportFormCtrl" class="page4">
-    <h2>Report Encounter</h2>
-    <h3>Safety on Mars is your responsibility</h3>
-
-  <div>
+<div class="page4">
+  <h2>Report Encounter</h2>
+  <h3>Safety on Mars is your responsibility</h3>
     <form ng-submit="submitReport($event)" name="reportForm" novalidate >
       <select ng-model="person.alienType" name="alienType" required class="alienType">
         <option value="" selected>Select alien type</option>
@@ -23,15 +11,8 @@
         <option value="e">Spiderpus</option>
       </select>
       <!-- <code>reportForm.alienType.$valid = {{ reportForm.alienType.$valid }} <code> -->
-      <textarea ng-model="person.actionTaken" name="actionTaken" cols="" rows="" required class="actionTaken">Action taken</textarea>
+      <textarea ng-model="person.actionTaken" name="actionTaken" cols="" rows="" required class="actionTaken" placeholder="Action taken"></textarea>
       <!-- <code>reportForm.actionTaken.$valid = {{ reportForm.actionTaken.$valid }} <code> -->
       <button ng-disabled="voterForm.$invalid">Submit Report</button>
-  </div>
-  </form>
-
-
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="js/main.js"></script>
-  </body>
-</html>
+    </form>
+</div>
