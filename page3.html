@@ -5,12 +5,9 @@
   </div>
   <!-- <form ng-submit="sendForm($event)" action="#" name="registerForm" novalidate > -->
     <ul>
-      <li>Friday, Oct 23 - Lizard<p>Smoked it</p></li>
-      <li>Friday, Oct 23 - Lizard<p>Smoked it</p></li>
-      <li>Friday, Oct 23 - Lizard<p>Smoked it</p></li>
-      <li>Friday, Oct 23 - Lizard<p>Smoked it</p></li>
-      <li>Friday, Oct 23 - Lizard<p>Smoked it</p></li>
-      <li>Friday, Oct 23 - Lizard<p>Smoked it</p></li>
+      <li ng-repeat="encounter in encounters">{{ encounter.date }} - {{ encounter.atype }} </br>
+      {{ encounter.action }}</li>
+
     </ul>
   <!-- </form> -->
   <div>

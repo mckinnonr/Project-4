@@ -1,4 +1,4 @@
-angular.module('myFormApp', ['ui.router'])
+angular.module('myFormApp', ['ui.router','ngCookies'])
 
   .config(['$stateProvider',
            '$urlRouterProvider',
@@ -14,47 +14,112 @@ angular.module('myFormApp', ['ui.router'])
            });
 
            $stateProvider
+            //  page 1
              .state('welcome', {
                url: '/',
-               templateUrl: 'page1.html'
+               templateUrl: 'page1.html',
+              //  if logged in, prevents user from going to login page again
+               controller: ['$cookies', function($cookies){
+                 $cookies.putObject('mars_user', undefined);
+               }],
+               controllerAs: 'welcome'
              })
+            //  page 2
              .state('register', {
                url: '/register',
                templateUrl: 'page2.html',
-               controller: 'RegisterFormCtrl'
-
+               controller: 'RegisterFormCtrl',
+               resolve: {
+                 user: ['$cookies',function($cookies){
+                   if($cookies.getObject('mars_user')){
+                     $state.go('encounters');
+                   }
+                 }]
+               }
              })
+            //  page 3
              .state('encounters', {
                url: '/encounters',
-               templateUrl: 'page3.html'
+               templateUrl: 'page3.html',
+               controller: 'EncountersCtrl'
              })
+            //  page 4
              .state('report', {
                url: '/report',
-               templateUrl: 'page4.html'
+               templateUrl: 'page4.html',
+               controller: 'ReportCtrl'
              })
   }])
 
-  .controller('RegisterFormCtrl', ['$scope','$state',function($scope,$state){
 
+  // for page 2
+  .controller('RegisterFormCtrl', ['$scope','$state','$http','$cookies', function($scope,$state,$http,$cookies){
+    var API_URL_GET_JOBS = "https://red-wdp-api.herokuapp.com/api/mars/jobs";
+    var API_URL_CREATE_COLONIST = "https://red-wdp-api.herokuapp.com/api/mars/colonists";
+    $scope.colonist = {};
+        $http.get(API_URL_GET_JOBS).then(function(response){
+    $scope.jobs = response.data.jobs
+    });
     $scope.submitRegistration = function(e){
       e.preventDefault();
-      console.log($scope.registerForm);
+      // console.log($scope.registerForm);
       if ($scope.registerForm.$invalid) {
         $scope.showValidation=true;
       } else {
-        $state.go('encounters');
+        // debugger;
+        // send report
+        $http({
+          method: 'POST',
+          url: API_URL_CREATE_COLONIST,
+          data: { colonist: $scope.colonist }
+        }).then(function(response){
+          $cookies.putObject('mars_user', response.data.colonist);
+          $state.go('encounters');
+          // debugger;
+        })
       }
     }
   }])
-  .controller('ReportFormCtrl', ['$scope', function($scope){
 
+
+  // for page 3
+  .controller('EncountersCtrl', ['$scope','$state','$http','$cookies', function($scope,$state,$http,$cookies){
+    var ENCOUNTERS_API_URL = 'https://red-wdp-api.herokuapp.com/api/mars/encounters';
+    $scope.colonist = {};
+        $http.get(ENCOUNTERS_API_URL).then(function(response){
+    $scope.encounters = response.data.encounters
+    });
+    }])
+
+
+    // for page 4
+    .controller('ReportCtrl', ['$scope','$state','$http','$cookies', function($scope,$state,$http,$cookies){
+    var ALIEN_TYPE_API_URL = "https://red-wdp-api.herokuapp.com/api/mars/aliens";
+    var ENCOUNTERS_API_URL = 'https://red-wdp-api.herokuapp.com/api/mars/encounters';
+      $scope.colonist = {};
+          $http.get(ALIEN_TYPE_API_URL).then(function(response){
+      $scope.aliens = response.data.aliens
+      });
+      // }])
+    // .controller('ReportFormCtrl', ['$scope','$http', function($scope,$http){
     $scope.submitReport = function(e){
       e.preventDefault();
-      console.log($scope.reportForm);
+      // console.log($scope.reportForm);
+      debugger;
       if ($scope.reportForm.$invalid) {
         $scope.showValidation=true;
       } else {
+        // send report
         $state.go('report');
+        $http({
+          method: 'POST',
+          url: ENCOUNTERS_API_URL,
+          data: { colonist: $scope.encounters }
+        }).then(function(response){
+          $cookies.putObject('mars_user', response.data.encounters);
+          $state.go('encounters');
+          // debugger;
+        })
       }
     }
   }]);

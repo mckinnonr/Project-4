@@ -2,17 +2,20 @@
     <h2>Who are you?</h2>
     <form ng-submit="submitRegistration($event)" name="registerForm" novalidate>
     <fieldset>
-      <input ng-model="person.name" type="text" name="name" ng-minlength="2" placeholder="Name" required class="name"/>
+      <input ng-model="colonist.name" type="text" name="name" ng-minlength="2" placeholder="Name" required class="name"/>
       <!-- <code>registerForm.name.$valid = {{ registerForm.name.$valid }} <code> -->
-      <input ng-model="person.age" type="number" name="age" placeholder="Age" required class="age"/>
+      <input ng-model="colonist.age" type="number" name="age" placeholder="Age" required class="age"/>
       <!-- <code>registerForm.age.$valid = {{ registerForm.age.$valid }} <code> -->
-      <select ng-model="person.occupation" name="occupation" required class="occupation">
+      <select ng-model="colonist.job_id" name="occupation" required class="occupation">
         <option value="" selected>Select occupation</option>
+        <!-- gets data from the API -->
+        <option value="{{ job.id }}" ng-repeat="job in jobs" >{{ job.name }}</option>
+        <!-- old data replaced by API line above
         <option value="a">Janitor</option>
         <option value="b">Alien hunter</option>
         <option value="c">Dust farmer</option>
         <option value="d">Battery technician</option>
-        <option value="e">Yoga teacher</option>
+        <option value="e">Yoga teacher</option> -->
       </select>
       <!-- <code>registerForm.occupation.$valid = {{ registerForm.occupation.$valid }} <code> -->
     </fieldset>
