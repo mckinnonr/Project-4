@@ -1,4 +1,4 @@
-angular.module('myFormApp', ['ui.router','ngCookies'])
+angular.module('myFormApp', ['ui.router','ngCookies','ngTouch'])
 
   .config(['$stateProvider',
            '$urlRouterProvider',
@@ -19,8 +19,11 @@ angular.module('myFormApp', ['ui.router','ngCookies'])
                url: '/',
                templateUrl: 'page1.html',
               //  if logged in, prevents user from going to login page again
-               controller: ['$cookies', function($cookies){
+               controller: ['$cookies','$state','$scope', function($cookies, $state, $scope){
                  $cookies.putObject('mars_user', undefined);
+                 $scope.swipeLeft=function(){
+                   $state.go('register');
+                 }
                }],
                controllerAs: 'welcome'
              })
@@ -36,6 +39,9 @@ angular.module('myFormApp', ['ui.router','ngCookies'])
                    }
                  }]
                }
+              //  $scope.swipeRight=function(){
+              //    $state.go('welcome');
+              //  }
              })
             //  page 3
              .state('encounters', {
@@ -96,7 +102,8 @@ angular.module('myFormApp', ['ui.router','ngCookies'])
     .controller('ReportCtrl', ['$scope','$state','$http','$cookies', function($scope,$state,$http,$cookies){
     var ALIEN_TYPE_API_URL = "https://red-wdp-api.herokuapp.com/api/mars/aliens";
     var ENCOUNTERS_API_URL = 'https://red-wdp-api.herokuapp.com/api/mars/encounters';
-      $scope.colonist = {};
+    var date = new Date();
+      $scope.encounter = {date: date.getFullYear()+"-"+date.getMonth()+"-"+date.getDate(), colonist_id: $cookies.getObject('mars_user').id};
           $http.get(ALIEN_TYPE_API_URL).then(function(response){
       $scope.aliens = response.data.aliens
       });
@@ -105,20 +112,18 @@ angular.module('myFormApp', ['ui.router','ngCookies'])
     $scope.submitReport = function(e){
       e.preventDefault();
       // console.log($scope.reportForm);
-      debugger;
       if ($scope.reportForm.$invalid) {
         $scope.showValidation=true;
+        // debugger;
       } else {
+        // debugger;
         // send report
-        $state.go('report');
         $http({
           method: 'POST',
           url: ENCOUNTERS_API_URL,
-          data: { colonist: $scope.encounters }
+          data: { encounter: $scope.encounter }
         }).then(function(response){
-          $cookies.putObject('mars_user', response.data.encounters);
           $state.go('encounters');
-          // debugger;
         })
       }
     }

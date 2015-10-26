@@ -1,11 +1,11 @@
-<div class="page4">
+<div class="page4" ng-swipe-right="swipeRight()">
   <h2>Report Encounter</h2>
   <h3>Safety on Mars is your responsibility</h3>
     <form ng-submit="submitReport($event)" name="reportForm" novalidate >
-      <select ng-model="person.alienType" name="alienType" required class="alienType">
+      <select ng-model="encounter.atype" name="alienType" required class="alienType">
         <option value="" selected>Select alien type</option>
         <!-- gets data from the API -->
-        <option value="{{ aliens.id }}" ng-repeat="alien in aliens" >{{ alien.type }}</option>
+        <option value="{{ alien.type }}" ng-repeat="alien in aliens" >{{ alien.type }}</option>
         <!-- old data replaced by API line above
         <option value="a">Lizard Man</option>
         <option value="b">Giant Slug</option>
@@ -14,7 +14,7 @@
         <option value="e">Spiderpus</option> -->
       </select>
       <!-- <code>reportForm.alienType.$valid = {{ reportForm.alienType.$valid }} <code> -->
-      <textarea ng-model="person.actionTaken" name="actionTaken" cols="" rows="" required class="actionTaken" placeholder="Action taken"></textarea>
+      <textarea ng-model="encounter.action" name="action" cols="" rows="" required class="actionTaken" placeholder="Action taken"></textarea>
       <!-- <code>reportForm.actionTaken.$valid = {{ reportForm.actionTaken.$valid }} <code> -->
       <button ng-disabled="voterForm.$invalid">Submit Report</button>
     </form>

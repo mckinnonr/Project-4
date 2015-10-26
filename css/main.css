@@ -250,10 +250,13 @@ body {
   text-transform: uppercase; }
 
 .name.ng-invalid.ng-dirty, .age.ng-invalid.ng-dirty, .occupation.ng-invalid.ng-dirty, .alienType.ng-invalid.ng-dirty, .actionTaken.ng-invalid.ng-dirty {
-  border: 2px solid #ed4343; }
+  border: 4px solid #ed4343; }
 
 .name.ng-valid.ng-dirty, .age.ng-valid.ng-dirty, .occupation.ng-valid.ng-dirty, .alienType.ng-valid.ng-dirty, .actionTaken.ng-valid.ng-dirty {
-  border: 2px solid green; }
+  border: 4px solid green; }
+
+code {
+  color: white; }
 
 ::-webkit-input-placeholder {
   color: #ed4343;
